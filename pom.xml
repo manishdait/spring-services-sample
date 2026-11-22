@@ -27,6 +27,7 @@
         <java.version>25</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.services.version>2.0.0</spring.services.version>
+        <springdoc.openapi.version>3.2.1</springdoc.openapi.version>
         <spotless.plugin.version>3.11.0</spotless.plugin.version>
     </properties>
 
@@ -38,6 +39,12 @@
                 <version>${spring.services.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.openapi.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

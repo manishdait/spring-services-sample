@@ -28,6 +28,24 @@ services:
     networks:
       - spring-services
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    command: start-dev
+    environment:
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://postgres:5432/service_db
+      - KC_DB_USERNAME=postgres
+      - KC_DB_PASSWORD=password
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    ports:
+      - "8090:8080"
+    depends_on:
+      - postgres
+    networks:
+      - spring-services
+
+
 volumes:
   pg_data: {}
   pgadmin_data: {}

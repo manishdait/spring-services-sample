@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: spring-services-sample-coredb
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/service_db
+    username: postgres
+    password: password
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    properties:
+      jakarta:
+        persistence:
+          create-database-schemas: true
+
+#  TDOD: temporary workaround mock values need to dive deep
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://your-idp.example.com/realms/demo
+          jwk-set-uri: http://localhost:8081/.well-known/jwks.json
+
+
+server:
+  port: 8080

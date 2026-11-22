@@ -20,6 +20,7 @@
 
     <modules>
         <module>01-core-db</module>
+        <module>02-core-security</module>
     </modules>
 
 

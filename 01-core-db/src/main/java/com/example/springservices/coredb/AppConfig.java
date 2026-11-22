@@ -1,5 +1,7 @@
 package com.example.springservices.coredb;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -12,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * /api/v1/ticket/** endpoint without authentication.
  */
 @Configuration
-public class SecurityConfig {
+public class AppConfig {
   @Bean
   @Order(0)
   public SecurityFilterChain filterChain(HttpSecurity http) {
@@ -20,5 +22,15 @@ public class SecurityConfig {
         .authorizeHttpRequests(request -> request.anyRequest().permitAll())
         .csrf(AbstractHttpConfigurer::disable);
     return http.build();
+  }
+
+  @Bean
+  public OpenAPI openAPIDefinition() {
+    return new OpenAPI()
+        .info(
+            new Info()
+                .title("TicketEntity Api")
+                .description(
+                    "An api demonstrating the use of the spring-services AbstractEntity, AbstractDbBackedServices and EntityRepository classes."));
   }
 }

@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "ticket")
-public class Ticket extends AbstractEntity {
+public class TicketEntity extends AbstractEntity {
   @Column(name = "title", nullable = false, length = 100)
   private String title;
 

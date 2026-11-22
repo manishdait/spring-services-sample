@@ -9,14 +9,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * Configuration to add a filter before the spring-services security filter. to allow the
- * /api/v1/public/** endpoint without authentication.
+ * /api/v1/ticket/** endpoint without authentication.
  */
 @Configuration
 public class SecurityConfig {
   @Bean
   @Order(0)
   public SecurityFilterChain filterChain(HttpSecurity http) {
-    http.securityMatcher("/api/v1/public/**")
+    http.securityMatcher("/api/v1/ticket/**")
         .authorizeHttpRequests(request -> request.anyRequest().permitAll())
         .csrf(AbstractHttpConfigurer::disable);
     return http.build();

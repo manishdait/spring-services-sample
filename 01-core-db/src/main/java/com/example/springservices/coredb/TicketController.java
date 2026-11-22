@@ -1,9 +1,11 @@
 package com.example.springservices.coredb;
 
+import com.openelements.spring.base.data.DbHealthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/ticket")
 @Tag(name = "Ticket", description = "API for managing ticket")
 public class TicketController {
+  private final DbHealthService dbHealthService;
   private final TicketService ticketService;
 
-  public TicketController(TicketService ticketService) {
+  public TicketController(TicketService ticketService, DbHealthService dbHealthService) {
     this.ticketService = ticketService;
+    this.dbHealthService = dbHealthService;
   }
 
   @GetMapping
@@ -64,5 +68,13 @@ public class TicketController {
   public ResponseEntity<Void> deleteTicket(@PathVariable UUID id) {
     ticketService.delete(id);
     return ResponseEntity.status(HttpStatus.OK).body(null);
+  }
+
+  @GetMapping("/health-check")
+  @Operation(summary = "Check DB Health", description = "Check database health")
+  @ApiResponse(responseCode = "200", description = "Database health successfully fetch")
+  public ResponseEntity<Map<String, Boolean>> checkDbHealth() {
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(Map.of("isDbHealthy", dbHealthService.isDatabaseReachable()));
   }
 }

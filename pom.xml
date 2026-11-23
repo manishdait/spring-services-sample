@@ -17,12 +17,9 @@
     <name>spring-services-sample</name>
     <description>Samples for using spring-service</description>
     <url>https://github.com/manishdait/spring-samples-sample</url>
-
     <modules>
-        <module>01-core-db</module>
-        <module>02-core-security</module>
+        <module>core</module>
     </modules>
-
 
     <properties>
         <java.version>25</java.version>

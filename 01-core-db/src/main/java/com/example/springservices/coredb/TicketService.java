@@ -27,8 +27,12 @@ public class TicketService extends AbstractDbBackedDataService<TicketEntity, Tic
 
   @Override
   protected void updateEntity(@NonNull TicketEntity entity, @NonNull TicketDao data) {
-    entity.setTitle(data.title());
-    entity.setDescription(data.description());
+    if (data.title() != null) {
+      entity.setTitle(data.title());
+    }
+    if (data.description() != null) {
+      entity.setDescription(data.description());
+    }
   }
 
   @Override

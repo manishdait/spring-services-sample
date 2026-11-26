@@ -1,5 +1,6 @@
-package com.example.servicesample.core.book;
+package com.example.springsamples.core.listener;
 
+import com.example.springsamples.core.dao.BookDto;
 import com.openelements.spring.base.events.OnObjectCreate;
 import com.openelements.spring.base.events.OnObjectDelete;
 import com.openelements.spring.base.events.OnObjectUpdate;
@@ -8,28 +9,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-/** EventListener for the BookEntity */
 @Component
-public class BookEventListeners {
-  private static final Logger LOG = LoggerFactory.getLogger(BookEventListeners.class);
+public class BookEntityListener {
+  private static final Logger log = LoggerFactory.getLogger(BookEntityListener.class);
 
   @EventListener
   public void onCreated(OnObjectCreate<BookDto> event) {
-    LOG.info("Book created: {}", event.getData());
+    log.info("Book entity created with id: {}", event.entityId());
   }
 
   @EventListener
   public void onUpdate(OnObjectUpdate<BookDto> event) {
-    LOG.info("Book updated:");
-    if (event.getPrevious().isPresent()) {
-      LOG.info("\tPrevious Entry: {}", event.getPrevious().get());
-    }
+    log.info("Book entity updated with id: {}", event.entityId());
 
-    LOG.info("\tNew Entry: {}", event.getData());
+    if (event.isPreviousKnown()) {
+      log.info("Previous State: {}", event.getPrevious());
+    }
   }
 
   @EventListener
   public void afterDelete(OnObjectDelete<BookDto> event) {
-    LOG.info("Book deleted: {}", event.getData());
+    log.info("Book entity deleted with id: {}", event.entityId());
   }
 }

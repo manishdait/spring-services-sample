@@ -1,11 +1,13 @@
 spring:
   application:
-    name: spring-service-sample-core
+    name: "spring-service-sample-core"
+
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/service_db
     username: postgres
     password: password
+
   jpa:
     database: postgresql
     hibernate:
@@ -15,12 +17,11 @@ spring:
         persistence:
           create-database-schemas: true
 
-  #  TDOD: temporary workaround mock values, need to dive deep
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://your-idp.example.com/realms/demo
+          issuer-uri: http://localhost:8080/realms/spring_services
 
 server:
   port: 8081

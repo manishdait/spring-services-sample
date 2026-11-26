@@ -21,7 +21,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/spring_services
+          issuer-uri: http://localhost:8080/realms/spring-services-samples
 
 server:
   port: 8081
